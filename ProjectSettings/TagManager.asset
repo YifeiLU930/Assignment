@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -43,7 +44,4 @@ TagManager:
     locked: 0
   - name: Playlevel
     uniqueID: 1249047257
-    locked: 0
-  - name: Background
-    uniqueID: 3764035583
     locked: 0
