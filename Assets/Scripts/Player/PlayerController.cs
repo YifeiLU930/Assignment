@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         float hInput = Input.GetAxisRaw("Horizontal");
         bool MouseInput = Input.GetButtonDown("Fire1");
+        bool MouseInput2 = Input.GetButtonDown("Fire2");
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
 
@@ -71,8 +72,27 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDirection = new Vector2(hInput * speed, rb.velocity.y);
         rb.velocity = moveDirection;
 
+       
         anim.SetFloat("hInput", Mathf.Abs(hInput));
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("LeftMouseClick", MouseInput);
+        anim.SetBool("RightMouseClick", MouseInput2);
+        //Flip
+
+        if (hInput != 0)
+            sr.flipX = (hInput < 0);
+
+        if (isGrounded)
+            rb.gravityScale = 1;
+
+         
     }
+
+    public void IncreaseGravity()
+    {
+        rb.gravityScale = 5;
+    }
+
+
 }
+
