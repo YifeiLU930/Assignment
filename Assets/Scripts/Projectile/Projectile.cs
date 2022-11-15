@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+
     public float lifetime;
 
     [HideInInspector]
@@ -16,9 +16,8 @@ public class Projectile : MonoBehaviour
         if (lifetime <= 0)
             lifetime = 2.0f;
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(speed,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
         Destroy(gameObject, lifetime);
-
-
     }
 }
+    

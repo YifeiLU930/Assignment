@@ -17,7 +17,58 @@ public class PlayerController : MonoBehaviour
     public LayerMask isGroundLayer;
     public float groundCheckRadius;
 
-    // Start is called before the first frame update
+    Coroutine jumpForceChange;
+    public int maxLives = 5;
+    private int _lives = 3;
+
+    public int lives
+    {
+        get { return _lives; }
+        set
+        {
+            //if(_lives > value)
+            //we lost a life - respawn
+
+            _lives = value;
+
+            if (_lives > maxLives)
+                _lives = maxLives;
+
+            //if (_lives<0)
+            //gameover code goes here
+
+            Debug.Log("Lives have been set to: " + _lives.ToString());
+        }
+    }
+   
+    public void StartJumpForceChange()
+    {
+        if (jumpForceChange == null)
+        {
+            jumpForceChange = StartCoroutine(JumpForceChange());
+        }
+        else
+        {
+            StopCoroutine(jumpForceChange);
+            jumpForceChange = null;
+            jumpForce /= 2;
+            jumpForceChange = StartCoroutine(JumpForceChange());
+        }
+
+    }
+
+    IEnumerator JumpForceChange()
+    {
+        jumpForce *= 2;
+
+        yield return new WaitForSeconds(3.0f);
+
+        jumpForce /= 2;
+        jumpForceChange = null;
+
+    }
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
