@@ -144,6 +144,16 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 5;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Squish"))
+        {
+            collision.gameObject.GetComponentInParent<EnemyWalker>().Squish();
+
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.up * jumpForce);
+        }
+    }
 
 }
 

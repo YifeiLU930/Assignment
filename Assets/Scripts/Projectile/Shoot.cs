@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Shoot : MonoBehaviour
 {
@@ -12,9 +13,7 @@ public class Shoot : MonoBehaviour
 
     public Projectile projectilePrefab;
 
-
-
-
+    public UnityEvent OnProjectileSpawned;
 
     void Start()
     {
@@ -45,6 +44,8 @@ public class Shoot : MonoBehaviour
 
         }
 
+
+        OnProjectileSpawned?.Invoke();
 
     }
 }
