@@ -11,6 +11,8 @@ TagManager:
   - Barrier
   - PlayerProjectile
   - EnemyProjectile
+  - Checkpoint
+  - DieBlock
   layers:
   - Default
   - TransparentFX
