@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(SpriteRenderer))]
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,12 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     SpriteRenderer sr;
+    AudioSourceManager asm;
+   // GameManager gm;
+    
+    
+    
+    
     public float speed;
     public float jumpForce;
 
@@ -18,9 +25,15 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
 
     Coroutine jumpForceChange;
+
+    //Audio Source
+  
+    public AudioClip jumpSound;
+    public AudioClip squishSound;
+
     
-   
-   
+
+
     public void StartJumpForceChange()
     {
         if (jumpForceChange == null)
@@ -54,6 +67,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        asm = GetComponent<AudioSourceManager>();
+       // gm = GetComponent<GameManager>();
+       
+     
 
         if (speed <= 0)
         
@@ -98,6 +115,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce);
+
+            asm.PlayOneShot(jumpSound, false);
         }
        
         Vector2 moveDirection = new Vector2(hInput * speed, rb.velocity.y);
@@ -132,6 +151,9 @@ public class PlayerController : MonoBehaviour
 
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce);
+
+            if (squishSound)
+                asm.PlayOneShot(squishSound, false);
         }
 
         if (collision.CompareTag("Checkpoint"))
@@ -140,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
+      
 
     }
 

@@ -12,6 +12,7 @@ public class Pickups : MonoBehaviour
     }
 
     public PickupType currentPickup;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,6 +31,7 @@ public class Pickups : MonoBehaviour
                     break;
             }
 
+           
             Destroy(gameObject);
              
         }
