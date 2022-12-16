@@ -162,8 +162,23 @@ public class PlayerController : MonoBehaviour
 
         }
 
-      
 
+        if (collision.gameObject.CompareTag("DieBlock"))
+        {
+            GameManager.instance.lives--;
+        }
+
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
+        {
+           GameManager.instance.lives--;
+        }
+    
+
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GameManager.instance.lives--;
+        }
     }
 
 }

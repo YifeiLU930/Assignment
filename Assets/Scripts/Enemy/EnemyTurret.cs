@@ -7,21 +7,21 @@ public class EnemyTurret : Enemy
     public float projectileFireRate;
     float timeSinceLastFire;
     Shoot shootScript;
-   // AudioSourceManager asm;
+     AudioSourceManager asm;
 
 
-   // public AudioClip TurretDieSound;
+     public AudioClip TurretDieSound;
 
     // Start is called before the first frame update
-   
-    
+
+
 
     public override void Start()
     {
-       
+
 
         base.Start();
-      //  asm = GetComponent<AudioSourceManager>();
+          asm = GetComponent<AudioSourceManager>();
         shootScript = GetComponent<Shoot>();
         shootScript.OnProjectileSpawned.AddListener(UpdateTimeSinceLastFire);
 
@@ -31,10 +31,10 @@ public class EnemyTurret : Enemy
     {
         shootScript.OnProjectileSpawned.RemoveListener(UpdateTimeSinceLastFire);
     }
-   
-   
 
-   void Update()
+
+
+    void Update()
     {
         AnimatorClipInfo[] currentClips = anim.GetCurrentAnimatorClipInfo(0);
 
@@ -43,30 +43,32 @@ public class EnemyTurret : Enemy
             if (Time.time >= timeSinceLastFire + projectileFireRate)
             {
                 anim.SetTrigger("Fire");
-                
+
             }
         }
     }
 
-  
-    
+
+
     void UpdateTimeSinceLastFire()
     {
         timeSinceLastFire = Time.time;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+   private void OnTriggerEnter2D(Collider2D collision)
+   {
         if (collision.CompareTag("PlayerProjectile"))
-        {
+       {
 
             Destroy(gameObject);
 
+       }
+
+        if (TurretDieSound)
+        
+    {
+    asm.PlayOneShot(TurretDieSound, false);
         }
-
-       // if (TurretDieSound)
-       //     asm.PlayOneShot(TurretDieSound, false);
-
     }
 
 }
